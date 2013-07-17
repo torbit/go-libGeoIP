@@ -38,12 +38,12 @@ import (
 // Globals (const arrays that will be initialized inside init())
 var (
 	countryCode2 = []string{
-		"--", "AP", "EU", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AN", "AO", "AQ", "AR",
+		"--", "AP", "EU", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "CW", "AO", "AQ", "AR",
 		"AS", "AT", "AU", "AW", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ",
 		"BM", "BN", "BO", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF",
 		"CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CX", "CY", "CZ",
 		"DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI",
-		"FJ", "FK", "FM", "FO", "FR", "FX", "GA", "GB", "GD", "GE", "GF", "GH", "GI", "GL",
+		"FJ", "FK", "FM", "FO", "FR", "SX", "GA", "GB", "GD", "GE", "GF", "GH", "GI", "GL",
 		"GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR",
 		"HT", "HU", "ID", "IE", "IL", "IN", "IO", "IQ", "IR", "IS", "IT", "JM", "JO", "JP",
 		"KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC",
@@ -56,7 +56,7 @@ var (
 		"TH", "TJ", "TK", "TM", "TN", "TO", "TL", "TR", "TT", "TV", "TW", "TZ", "UA", "UG",
 		"UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE",
 		"YT", "RS", "ZA", "ZM", "ME", "ZW", "A1", "A2", "O1", "AX", "GG", "IM", "JE", "BL",
-		"MF", "BQ"}
+		"MF", "BQ", "SS"}
 
 	countryCode3 = []string{
 		"--", "AP", "EU", "AND", "ARE", "AFG", "ATG", "AIA", "ALB", "ARM", "CUW",
@@ -84,13 +84,13 @@ var (
 		"TZA", "UKR", "UGA", "UMI", "USA", "URY", "UZB", "VAT", "VCT", "VEN",
 		"VGB", "VIR", "VNM", "VUT", "WLF", "WSM", "YEM", "MYT", "SRB", "ZAF",
 		"ZMB", "MNE", "ZWE", "A1", "A2", "O1", "ALA", "GGY", "IMN", "JEY",
-		"BLM", "MAF", "BES",
+		"BLM", "MAF", "BES", "SSD",
 	}
 
 	countryName = []string{
 		"N/A", "Asia/Pacific Region", "Europe", "Andorra", "United Arab Emirates",
 		"Afghanistan", "Antigua and Barbuda", "Anguilla", "Albania", "Armenia",
-		"Netherlands Antilles", "Angola", "Antarctica", "Argentina", "American Samoa",
+		"Curaçao", "Angola", "Antarctica", "Argentina", "American Samoa",
 		"Austria", "Australia", "Aruba", "Azerbaijan", "Bosnia and Herzegovina",
 		"Barbados", "Bangladesh", "Belgium", "Burkina Faso", "Bulgaria", "Bahrain",
 		"Burundi", "Benin", "Bermuda", "Brunei Darussalam", "Bolivia", "Brazil", "Bahamas",
@@ -102,7 +102,7 @@ var (
 		"Djibouti", "Denmark", "Dominica", "Dominican Republic", "Algeria", "Ecuador",
 		"Estonia", "Egypt", "Western Sahara", "Eritrea", "Spain", "Ethiopia", "Finland",
 		"Fiji", "Falkland Islands (Malvinas)", "Micronesia, Federated States of",
-		"Faroe Islands", "France", "France, Metropolitan", "Gabon", "United Kingdom",
+		"Faroe Islands", "France", "Sint Maarten (Dutch part)", "Gabon", "United Kingdom",
 		"Grenada", "Georgia", "French Guiana", "Ghana", "Gibraltar", "Greenland", "Gambia",
 		"Guinea", "Guadeloupe", "Equatorial Guinea", "Greece",
 		"South Georgia and the South Sandwich Islands", "Guatemala", "Guam",
@@ -114,7 +114,7 @@ var (
 		"Korea, Democratic People's Republic of", "Korea, Republic of", "Kuwait",
 		"Cayman Islands", "Kazakhstan", "Lao People's Democratic Republic", "Lebanon",
 		"Saint Lucia", "Liechtenstein", "Sri Lanka", "Liberia", "Lesotho", "Lithuania",
-		"Luxembourg", "Latvia", "Libyan Arab Jamahiriya", "Morocco", "Monaco",
+		"Luxembourg", "Latvia", "Libya", "Morocco", "Monaco",
 		"Moldova, Republic of", "Madagascar", "Marshall Islands",
 		"Macedonia", "Mali", "Myanmar", "Mongolia",
 		"Macau", "Northern Mariana Islands", "Martinique", "Mauritania", "Montserrat",
@@ -138,7 +138,7 @@ var (
 		"Vanuatu", "Wallis and Futuna", "Samoa", "Yemen", "Mayotte", "Serbia",
 		"South Africa", "Zambia", "Montenegro", "Zimbabwe", "Anonymous Proxy",
 		"Satellite Provider", "Other", "Aland Islands", "Guernsey", "Isle of Man", "Jersey",
-		"Saint Barthelemy", "Saint Martin", "Bonaire, Saint Eustatius and Saba",
+		"Saint Barthelemy", "Saint Martin", "Bonaire, Saint Eustatius and Saba", "South Sudan",
 	}
 
 	countryContinentCode = []string{
@@ -167,7 +167,7 @@ var (
 		"AF", "EU", "AF", "OC", "NA", "SA", "AS", "EU", "NA", "SA",
 		"NA", "NA", "AS", "OC", "OC", "OC", "AS", "AF", "EU", "AF",
 		"AF", "EU", "AF", "--", "--", "--", "EU", "EU", "EU", "EU",
-		"NA", "NA", "NA",
+		"NA", "NA", "NA", "AF",
 	}
 )
 
